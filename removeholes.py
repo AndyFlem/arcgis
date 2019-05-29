@@ -9,6 +9,8 @@ def RemovePolygonHoles_management(input_fc, output_fc, threshold=0.0):
     threshold is numeric.
     """
 
+    print(arcpy.env.workspace)
+
     desc = arcpy.Describe(input_fc)
     if desc.dataType !="FeatureClass" and desc.dataType != "ShapeFile":
         print("Invalid data type. The input is supposed to be a Polygon FeatureClass or Shapefile.")
@@ -18,7 +20,6 @@ def RemovePolygonHoles_management(input_fc, output_fc, threshold=0.0):
             print("The input is supposed to be a Polygon FeatureClass or Shapefile.")
             return
 
-    arcpy.Delete_management(output_fc)
     arcpy.Copy_management(input_fc,output_fc)
     in_fc=output_fc
     
@@ -93,4 +94,3 @@ def RemovePolygonHoles_management(input_fc, output_fc, threshold=0.0):
                 updateCursor.updateRow(updateRow)
 
 
-RemovePolygonHoles_management("C:\\Temp\\Export_Output.shp","C:\\Temp\\Export_Output_2.shp",300)
